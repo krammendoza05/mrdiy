@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mr. DIY — Car Electronics & Accessories | Tanauan City, Batangas</title>
+  <meta name="description" content="Mr. DIY — Car electronics repair, lights installation, horn and accessories in Tanauan City, Batangas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --red: #D92B2B; --red-dark: #b02020; --yellow: #F5C518;
+      --dark: #111214; --dark2: #18191d; --dark3: #1f2126;
+      --border: rgba(255,255,255,0.08);
+      --text-muted: rgba(255,255,255,0.55);
+      --text-dim: rgba(255,255,255,0.35);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Nunito', sans-serif; background: var(--dark); color: #fff; overflow-x: hidden; line-height: 1.6; }
+
+    /* CURSOR GLOW */
+    .cursor-glow {
+      width: 320px; height: 320px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(217,43,43,0.08) 0%, transparent 70%);
+      position: fixed; pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%); transition: left 0.06s, top 0.06s;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(17,18,20,0.93); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border); padding: 0 2rem; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: 'Oswald', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; text-decoration: none; letter-spacing: 0.04em; }
+    .nav-logo span { color: var(--red); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.9rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none; transition: color 0.2s;
+      position: relative; padding-bottom: 2px;
+    }
+    .nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: var(--red); transition: width 0.25s ease; }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta { background: var(--red) !important; color: #fff !important; padding: 0.4rem 1.2rem; border-radius: 4px; transition: background 0.2s !important; }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--red-dark) !important; color: #fff !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 7rem 2rem 4rem; position: relative; overflow: hidden; background: var(--dark);
+    }
+    .hero-bg-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(217,43,43,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(217,43,43,0.07) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+    .hero-bg-glow {
+      position: absolute; width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(217,43,43,0.13) 0%, transparent 65%);
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      animation: glowPulse 4s ease-in-out infinite; pointer-events: none;
+    }
+    @keyframes glowPulse { 0%,100%{opacity:.7;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.1)} }
+    .slogan-pill {
+      position: relative; background: var(--yellow); color: #1a1a1a;
+      font-size: clamp(0.8rem, 2.2vw, 1rem); font-weight: 800;
+      padding: 0.65rem 1.8rem; border-radius: 6px; margin-bottom: 2rem;
+      max-width: 700px; box-shadow: 0 4px 24px rgba(245,197,24,0.3);
+      animation: fadeDown 0.7s ease both;
+    }
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)} }
+    .hero-title {
+      position: relative; font-family: 'Oswald', sans-serif;
+      font-size: clamp(5rem, 18vw, 11rem); font-weight: 700; line-height: 0.88;
+      color: #fff; animation: fadeUp 0.7s 0.1s ease both;
+      text-shadow: 0 0 80px rgba(217,43,43,0.2);
+    }
+    .hero-title span { color: var(--red); }
+    .hero-subtitle {
+      position: relative; font-family: 'Oswald', sans-serif;
+      font-size: clamp(1rem, 3vw, 1.5rem); font-weight: 400;
+      letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted);
+      margin-top: 0.6rem; margin-bottom: 2.5rem; animation: fadeUp 0.7s 0.2s ease both;
+    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)} }
+    .hero-btns { position: relative; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; animation: fadeUp 0.7s 0.3s ease both; }
+    .btn-red {
+      display: inline-block; background: var(--red); color: #fff;
+      font-size: 1rem; font-weight: 800; letter-spacing: 0.05em; padding: 0.85rem 2.4rem;
+      border-radius: 6px; text-decoration: none;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-red:hover { background: var(--red-dark); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(217,43,43,0.4); }
+    .btn-ghost {
+      display: inline-block; background: transparent; color: #fff;
+      font-size: 1rem; font-weight: 800; letter-spacing: 0.05em; padding: 0.82rem 2.4rem;
+      border-radius: 6px; border: 2px solid rgba(255,255,255,0.25); text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s, background 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.7); transform: translateY(-3px); background: rgba(255,255,255,0.05); }
+    .scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      opacity: 0.35; animation: bounce 2.2s ease-in-out infinite;
+    }
+    .scroll-hint span { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; }
+    .scroll-arrow { width: 18px; height: 18px; border-right: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(45deg); }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)} }
+
+    /* STATS */
+    .stats-bar { background: var(--red); padding: 1.4rem 2rem; }
+    .stats-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem; }
+    .stat-item { text-align: center; cursor: default; }
+    .stat-num { font-family: 'Oswald', sans-serif; font-size: 2rem; font-weight: 700; display: block; line-height: 1; transition: transform 0.2s; }
+    .stat-item:hover .stat-num { transform: scale(1.15); }
+    .stat-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.85; }
+
+    /* SECTION COMMON */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-tag {
+      font-size: 0.78rem; font-weight: 800; letter-spacing: 0.25em; text-transform: uppercase; color: var(--red);
+      display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.75rem;
+    }
+    .section-tag::before { content:''; width:2rem; height:2px; background:var(--red); }
+    .section-title { font-family: 'Oswald', sans-serif; font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 700; line-height: 1.0; margin-bottom: 1.2rem; }
+    .section-desc { font-size: 0.98rem; color: var(--text-muted); max-width: 520px; line-height: 1.75; }
+
+    /* SERVICES */
+    #services { background: var(--dark); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; margin-top: 3rem; }
+    .service-card {
+      background: var(--dark2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 2rem 1.75rem; position: relative; overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; cursor: default;
+    }
+    .service-card:hover { transform: translateY(-6px); border-color: rgba(217,43,43,0.4); box-shadow: 0 16px 40px rgba(217,43,43,0.12); }
+    .service-card::after {
+      content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+      background:var(--red); transform:scaleX(0); transform-origin:left; transition:transform 0.35s;
+    }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-icon-wrap {
+      width: 52px; height: 52px; background: rgba(217,43,43,0.12); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
+      margin-bottom: 1.25rem; transition: background 0.3s, transform 0.3s;
+    }
+    .service-card:hover .service-icon-wrap { background: rgba(217,43,43,0.22); transform: scale(1.1) rotate(-5deg); }
+    .service-card h3 { font-family: 'Oswald', sans-serif; font-size: 1.3rem; font-weight: 600; margin-bottom: 0.6rem; color: #fff; }
+    .service-card p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; }
+    .service-badge { display: inline-block; margin-top: 1.2rem; background: rgba(217,43,43,0.15); color: #ff6b6b; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; padding: 0.3rem 0.8rem; border-radius: 4px; text-transform: uppercase; }
+
+    /* GALLERY */
+    #gallery { background: var(--dark2); overflow: hidden; }
+    .gallery-filter { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 2rem; margin-bottom: 2.5rem; }
+    .filter-btn {
+      background: var(--dark3); border: 1px solid var(--border); color: var(--text-muted);
+      font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; padding: 0.5rem 1.2rem;
+      border-radius: 40px; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .filter-btn:hover { transform: translateY(-2px); border-color: rgba(217,43,43,0.4); color: #fff; }
+    .filter-btn.active { background: var(--red); color: #fff; border-color: var(--red); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .gallery-item {
+      position: relative; border-radius: 10px; overflow: hidden;
+      aspect-ratio: 4/3; cursor: pointer; background: var(--dark3);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .gallery-item.tall { grid-row: span 2; aspect-ratio: auto; min-height: 300px; }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s;
+      filter: brightness(0.85) saturate(1.1); display: block;
+    }
+    .gallery-item:hover img { transform: scale(1.08); filter: brightness(1.05) saturate(1.3); }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.1) 55%, transparent 100%);
+      opacity: 0; transition: opacity 0.35s;
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 1.25rem;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-tag {
+      display: inline-block; background: var(--red); color: #fff;
+      font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.25rem 0.65rem; border-radius: 3px; margin-bottom: 0.5rem;
+      transform: translateY(10px); transition: transform 0.35s 0.05s;
+      width: fit-content;
+    }
+    .gallery-item:hover .gallery-tag { transform: translateY(0); }
+    .gallery-caption {
+      font-size: 0.9rem; font-weight: 700; color: #fff;
+      transform: translateY(10px); transition: transform 0.35s 0.1s;
+    }
+    .gallery-item:hover .gallery-caption { transform: translateY(0); }
+    .gallery-zoom-icon {
+      position: absolute; top: 1rem; right: 1rem; width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+      opacity: 0; transform: scale(0.7); transition: opacity 0.3s, transform 0.3s;
+    }
+    .gallery-item:hover .gallery-zoom-icon { opacity: 1; transform: scale(1); }
+
+    /* LIGHTBOX */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.96);
+      display: flex; align-items: center; justify-content: center; padding: 1rem;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox img {
+      max-width: 90vw; max-height: 85vh; border-radius: 8px; object-fit: contain;
+      transform: scale(0.92); transition: transform 0.3s, opacity 0.15s;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.8);
+    }
+    .lightbox.open img { transform: scale(1); }
+    .lb-btn {
+      position: absolute; width: 46px; height: 46px; border-radius: 50%;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; font-size: 1.2rem; cursor: pointer; display: flex;
+      align-items: center; justify-content: center; transition: background 0.2s, transform 0.2s;
+    }
+    .lb-btn:hover { background: var(--red); }
+    .lb-close { top: 1.5rem; right: 1.5rem; }
+    .lb-close:hover { transform: rotate(90deg); }
+    .lb-prev { top: 50%; left: 1.5rem; transform: translateY(-50%); }
+    .lb-prev:hover { transform: translateY(-50%) scale(1.1); }
+    .lb-next { top: 50%; right: 1.5rem; transform: translateY(-50%); }
+    .lb-next:hover { transform: translateY(-50%) scale(1.1); }
+    .lb-info { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); text-align: center; }
+    .lb-info span { font-size: 0.82rem; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; }
+
+    /* WHY */
+    #why { background: var(--dark3); }
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 1.25rem; margin-top: 3rem; }
+    .why-card {
+      background: var(--dark2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 1.75rem; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; cursor: default;
+    }
+    .why-card:hover { border-color: rgba(217,43,43,0.35); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+    .why-num { font-family: 'Oswald', sans-serif; font-size: 2.5rem; font-weight: 700; color: rgba(217,43,43,0.25); line-height: 1; margin-bottom: 0.8rem; transition: color 0.3s; }
+    .why-card:hover .why-num { color: rgba(217,43,43,0.55); }
+    .why-card h4 { font-family: 'Oswald', sans-serif; font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .why-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* CONTACT */
+    #contact { background: var(--dark); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; align-items: start; }
+    .contact-info { display: flex; flex-direction: column; gap: 0.75rem; }
+    .contact-row {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.1rem; border-radius: 8px; border: 1px solid transparent;
+      transition: border-color 0.25s, background 0.25s, transform 0.25s;
+    }
+    .contact-row:hover { border-color: var(--border); background: var(--dark2); transform: translateX(6px); }
+    .contact-icon-box {
+      width: 46px; height: 46px; flex-shrink: 0; background: rgba(217,43,43,0.12); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .contact-row:hover .contact-icon-box { background: rgba(217,43,43,0.25); transform: scale(1.1) rotate(-5deg); }
+    .contact-label { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.25rem; }
+    .contact-value { font-size: 0.97rem; color: rgba(255,255,255,0.88); line-height: 1.55; font-weight: 600; }
+    .map-box {
+      background: var(--dark3); border: 1px solid var(--border); border-radius: 10px;
+      height: 300px; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 0.75rem; text-align: center; padding: 2rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .map-box:hover { border-color: rgba(217,43,43,0.3); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    .map-pin-anim { font-size: 2.8rem; animation: pinPop 2s ease-in-out infinite; }
+    @keyframes pinPop { 0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-10px) scale(1.1)} }
+    .map-box strong { font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 600; color: rgba(255,255,255,0.8); }
+    .map-box p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* FOOTER */
+    footer { background: #0a0b0d; padding: 2.5rem 2rem; text-align: center; border-top: 1px solid rgba(217,43,43,0.2); }
+    .footer-logo { font-family: 'Oswald', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .footer-logo span { color: var(--red); }
+    footer p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.8; }
+    .footer-divider { width: 40px; height: 2px; background: var(--red); margin: 0.75rem auto; }
+
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) { .gallery-grid { grid-template-columns: repeat(2,1fr); } .gallery-item.tall { grid-row: span 1; aspect-ratio: 4/3; } }
+    @media (max-width: 768px) { .nav-links { display: none; } .contact-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 540px) { .gallery-grid { grid-template-columns: 1fr; } .services-grid { grid-template-columns: 1fr; } .why-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-btn lb-close" id="lbClose">&#10005;</button>
+  <button class="lb-btn lb-prev" id="lbPrev">&#8592;</button>
+  <button class="lb-btn lb-next" id="lbNext">&#8594;</button>
+  <img id="lbImg" src="" alt="Project photo" />
+  <div class="lb-info"><span id="lbCounter"></span></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Mr.<span>DIY</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Our Work</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-bg-glow"></div>
+  <div class="slogan-pill">⚡ "We fix your car's electricity — because your EX isn't the only one who needs rewiring." ⚡</div>
+  <h1 class="hero-title">Mr.<span>DIY</span></h1>
+  <p class="hero-subtitle">Car Electronics &amp; Accessories</p>
+  <div class="hero-btns">
+    <a href="#gallery" class="btn-red">See Our Work</a>
+    <a href="#contact" class="btn-ghost">Contact Us</a>
+  </div>
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-arrow"></div></div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item"><span class="stat-num">500+</span><span class="stat-label">Cars Serviced</span></div>
+    <div class="stat-item"><span class="stat-num">8+</span><span class="stat-label">Years Experience</span></div>
+    <div class="stat-item"><span class="stat-num">100%</span><span class="stat-label">Satisfaction</span></div>
+    <div class="stat-item"><span class="stat-num">Same Day</span><span class="stat-label">Turnaround</span></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-tag reveal">What We Do</div>
+    <h2 class="section-title reveal">Our Services</h2>
+    <p class="section-desc reveal">From faulty wiring to full accessory installations — we handle everything your car's electronics need, done right the first time.</p>
+    <div class="services-grid">
+      <div class="service-card reveal"><div class="service-icon-wrap">🔧</div><h3>Car Electronic Repairs</h3><p>Diagnose and repair all automotive electrical issues — blown fuses, ECU problems, dead batteries, and complex wiring faults.</p><span class="service-badge">⭐ Most Popular</span></div>
+      <div class="service-card reveal"><div class="service-icon-wrap">💡</div><h3>Lights Installation</h3><p>LED upgrades, HID kits, underbody lights, fog lights, daytime running lights, and custom interior ambient lighting setups.</p><span class="service-badge">🔥 Trending</span></div>
+      <div class="service-card reveal"><div class="service-icon-wrap">📢</div><h3>Horn &amp; Audio</h3><p>Musical horns, air horns, car alarms, plus full audio system setup including speakers, amplifiers, and subwoofers.</p><span class="service-badge">✅ Available</span></div>
+      <div class="service-card reveal"><div class="service-icon-wrap">📷</div><h3>Cameras &amp; Sensors</h3><p>Backup cameras, dashcams, parking sensors, and blind-spot detection — all professionally installed.</p><span class="service-badge">✅ Available</span></div>
+      <div class="service-card reveal"><div class="service-icon-wrap">🎛️</div><h3>Accessories Installation</h3><p>Car starters, remote start, power windows, central locking, and any aftermarket accessory your heart desires.</p><span class="service-badge">✅ Available</span></div>
+      <div class="service-card reveal"><div class="service-icon-wrap">🔌</div><h3>Wiring &amp; Rewiring</h3><p>Full vehicle rewiring, custom harness fabrication, and electrical system upgrades for all makes and models.</p><span class="service-badge">⚙️ Specialized</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-tag reveal">Real Work, Real Results</div>
+    <h2 class="section-title reveal">Our Finished Projects</h2>
+    <p class="section-desc reveal">Every photo below is a real job done right here in Tanauan, Batangas. Hover to explore, click to zoom in.</p>
+    <div class="gallery-filter reveal">
+      <button class="filter-btn active" data-filter="all">All Work</button>
+      <button class="filter-btn" data-filter="lights">Lights</button>
+      <button class="filter-btn" data-filter="wiring">Wiring</button>
+      <button class="filter-btn" data-filter="custom">Custom Builds</button>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item tall reveal" data-category="lights" data-index="0">
+        <img src="work1.jpg" alt="Blue LED underbody lights on sedan" loading="lazy" />
+        <div class="gallery-overlay"><span class="gallery-tag">💡 Lights</span><div class="gallery-caption">Blue LED underbody + DRL setup on sedan</div></div>
+        <div class="gallery-zoom-icon">🔍</div>
+      </div>
+      <div class="gallery-item reveal" data-category="wiring" data-index="1">
+        <img src="work2.jpg" alt="Power window door rewiring" loading="lazy" />
+        <div class="gallery-overlay"><span class="gallery-tag">🔌 Wiring</span><div class="gallery-caption">Power window motor &amp; full door rewiring</div></div>
+        <div class="gallery-zoom-icon">🔍</div>
+      </div>
+      <div class="gallery-item reveal" data-category="custom" data-index="2">
+        <img src="work3.jpg" alt="Lifted SUV custom build" loading="lazy" />
+        <div class="gallery-overlay"><span class="gallery-tag">🚙 Custom Build</span><div class="gallery-caption">Full custom SUV electrical &amp; accessories</div></div>
+        <div class="gallery-zoom-icon">🔍</div>
+      </div>
+      <div class="gallery-item reveal" data-category="lights" data-index="3">
+        <img src="work4.jpg" alt="Fortuner RGB grille and yellow fog lights" loading="lazy" />
+        <div class="gallery-overlay"><span class="gallery-tag">💡 Lights</span><div class="gallery-caption">Fortuner RGB grille + yellow fog lights</div></div>
+        <div class="gallery-zoom-icon">🔍</div>
+      </div>
+      <div class="gallery-item reveal" data-category="lights" data-index="4">
+        <img src="work5.jpg" alt="Honda Civic underbody LED glow" loading="lazy" />
+        <div class="gallery-overlay"><span class="gallery-tag">💡 Lights</span><div class="gallery-caption">Honda Civic full LED underbody glow setup</div></div>
+        <div class="gallery-zoom-icon">🔍</div>
+      </div>
+      <div class="gallery-item reveal" data-category="wiring" data-index="5">
+        <img src="work6.jpg" alt="Engine bay wiring restoration" loading="lazy" />
+        <div class="gallery-overlay"><span class="gallery-tag">🔧 Repair</span><div class="gallery-caption">Honda engine bay electrical restoration</div></div>
+        <div class="gallery-zoom-icon">🔍</div>
+      </div>
+      <div class="gallery-item reveal" data-category="lights" data-index="6">
+        <img src="work7.jpg" alt="Custom LED accessory installation" loading="lazy" />
+        <div class="gallery-overlay"><span class="gallery-tag">⭐ Featured</span><div class="gallery-caption">Custom accessories &amp; electronics installation</div></div>
+        <div class="gallery-zoom-icon">🔍</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="container">
+    <div class="section-tag reveal">The Mr. DIY Edge</div>
+    <h2 class="section-title reveal">Why Choose Us</h2>
+    <p class="section-desc reveal">We don't just fix cars — we take pride in every job, big or small.</p>
+    <div class="why-grid">
+      <div class="why-card reveal"><div class="why-num">01</div><h4>Experienced Hands</h4><p>Years of hands-on experience with all car makes and models. We've seen every wiring nightmare — and solved them all.</p></div>
+      <div class="why-card reveal"><div class="why-num">02</div><h4>Honest Pricing</h4><p>No hidden charges, no surprise fees. Clear quote before we touch your car. Your wallet is safe with us.</p></div>
+      <div class="why-card reveal"><div class="why-num">03</div><h4>Quality Parts Only</h4><p>We use only trusted, durable parts. Your car deserves better than cheap replacements.</p></div>
+      <div class="why-card reveal"><div class="why-num">04</div><h4>Quick Turnaround</h4><p>Most jobs done the same day. We respect your time as much as you do — probably more, actually.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-tag reveal">Find Us</div>
+    <h2 class="section-title reveal">Get in Touch</h2>
+    <p class="section-desc reveal">Drop by the shop, give us a call, or message us on Facebook. We're always ready to help.</p>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-row reveal"><div class="contact-icon-box">📍</div><div><div class="contact-label">Location</div><div class="contact-value">Tanauan City, Batangas<br>Philippines</div></div></div>
+        <div class="contact-row reveal"><div class="contact-icon-box">📞</div><div><div class="contact-label">Phone / Viber</div><div class="contact-value">+63 912 345 6789</div></div></div>
+        <div class="contact-row reveal"><div class="contact-icon-box">🕐</div><div><div class="contact-label">Operating Hours</div><div class="contact-value">Monday – Saturday: 8:00 AM – 6:00 PM<br>Sunday: By Appointment</div></div></div>
+        <div class="contact-row reveal"><div class="contact-icon-box">💬</div><div><div class="contact-label">Facebook</div><div class="contact-value">Mr. DIY Car Electronics<br><small style="color:var(--text-muted);font-weight:500;">Message us on FB for inquiries!</small></div></div></div>
+      </div>
+      <div class="map-box reveal">
+        <div class="map-pin-anim">📍</div>
+        <strong>Tanauan City, Batangas</strong>
+        <p>Near you — whenever your car's lights decide to throw a tantrum at 2am.</p>
+        <a href="https://maps.google.com/?q=Tanauan+City+Batangas" target="_blank" rel="noopener" class="btn-red" style="margin-top:0.75rem;font-size:0.88rem;padding:0.65rem 1.75rem;">Open in Google Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Mr.<span>DIY</span></div>
+  <div class="footer-divider"></div>
+  <p>Car Electronics &amp; Accessories — Tanauan City, Batangas, Philippines</p>
+  <p>© 2026 Mr. DIY. All sparks reserved. ⚡</p>
+</footer>
+
+<script>
+  // Cursor glow
+  const glow = document.getElementById('cursorGlow');
+  document.addEventListener('mousemove', e => { glow.style.left = e.clientX+'px'; glow.style.top = e.clientY+'px'; });
+
+  // Scroll reveal with stagger
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 80 * (i % 5));
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => obs.observe(el));
+
+  // Gallery filter
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        const show = filter === 'all' || item.dataset.category === filter;
+        item.style.opacity = show ? '1' : '0';
+        item.style.transform = show ? 'scale(1)' : 'scale(0.95)';
+        item.style.pointerEvents = show ? '' : 'none';
+        setTimeout(() => { item.style.display = show ? '' : 'none'; }, show ? 0 : 300);
+        if (show) setTimeout(() => { item.style.display=''; item.style.opacity='1'; item.style.transform='scale(1)'; }, 10);
+      });
+    });
+  });
+
+  // Lightbox
+  const images = [
+    { src:'work1.jpg', cap:'Blue LED underbody + DRL setup on sedan' },
+    { src:'work2.jpg', cap:'Power window motor & full door rewiring' },
+    { src:'work3.jpg', cap:'Full custom SUV electrical & accessories' },
+    { src:'work4.jpg', cap:'Fortuner RGB grille lights + yellow fog lights' },
+    { src:'work5.jpg', cap:'Honda Civic full LED underbody glow setup' },
+    { src:'work6.jpg', cap:'Honda engine bay electrical restoration' },
+    { src:'work7.jpg', cap:'Custom accessories & electronics installation' },
+  ];
+  let cur = 0;
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCtr = document.getElementById('lbCounter');
+
+  function open(idx) {
+    cur = idx;
+    lbImg.src = images[idx].src;
+    lbCtr.textContent = (idx+1) + ' of ' + images.length + ' — ' + images[idx].cap;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+  function nav(d) {
+    cur = (cur + d + images.length) % images.length;
+    lbImg.style.opacity = '0';
+    setTimeout(() => { lbImg.src = images[cur].src; lbCtr.textContent = (cur+1)+' of '+images.length+' — '+images[cur].cap; lbImg.style.opacity = '1'; }, 150);
+  }
+
+  document.querySelectorAll('.gallery-item').forEach(el => el.addEventListener('click', () => open(+el.dataset.index)));
+  document.getElementById('lbClose').addEventListener('click', close);
+  document.getElementById('lbPrev').addEventListener('click', () => nav(-1));
+  document.getElementById('lbNext').addEventListener('click', () => nav(1));
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') nav(-1);
+    if (e.key === 'ArrowRight') nav(1);
+  });
+  lbImg.style.transition = 'transform 0.3s, opacity 0.15s';
+</script>
+</body>
+</html>
